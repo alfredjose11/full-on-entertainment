@@ -16,29 +16,7 @@ font-family:'Poppins',sans-serif;
     text-align: center;
 }
 
-/* Main Section Title */
-.section-main-title {
-    font-size: 48px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 40px;
-    color: #ffffff;
-    animation: fadeSlideDown 1.2s ease-out forwards;
-    opacity: 0;
-}
 
-/* Animation */
-@keyframes fadeSlideDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 body{
 background:var(--dark);
 color:#fff;
@@ -684,4 +662,5 @@ color:#aaa;
 .section{padding:90px 8%;}
 
 }
+
 
