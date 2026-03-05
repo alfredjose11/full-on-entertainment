@@ -614,7 +614,9 @@ margin-left:10px;
 color:#fff;
 font-size:18px;
 }
-
+.contact-social a .fa-whatsapp{
+    color:#25D366;
+}
 /* SERVICES */
 .service-box{
 background:var(--card);
@@ -662,5 +664,6 @@ color:#aaa;
 .section{padding:90px 8%;}
 
 }
+
 
 
