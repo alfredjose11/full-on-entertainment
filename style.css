@@ -404,104 +404,298 @@ body {
     overflow: hidden;
 }
 
-.booking-container {
+/* --- RESET & BASE STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- SECTION CONTAINER --- */
+.now-booking {
+    position: relative;
+    min-height: 100vh;
+    background: #0f0f0f; /* Deep dark background */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 60px;
-    z-index: 2;
-    width: 100%;
-    max-width: 1100px;
-    /* Stack on mobile */
-    flex-wrap: wrap; 
+    padding: 80px 5%;
+    overflow: hidden;
 }
 
-/* POSTER: Set to handle portrait orientation perfectly */
-.movie-poster {
-    flex: 1;
-    min-width: 320px;
-    max-width: 450px;
+/* Background Glow Effect */
+.overlay {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    z-index: 0;
+}
+
+.booking-container {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap; /* Allows stacking on mobile */
+}
+
+/* --- LEFT SIDE: MOVIE POSTER --- */
+.movie-poster {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
 }
 
 .movie-poster img {
     width: 100%;
     height: auto;
-    max-height: 80vh; /* Prevents the poster from being taller than the screen */
-    object-fit: cover;
     border-radius: 24px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    border: 1px solid rgba(255,255,255,0.1); /* Subtle border for definition */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    transition: transform 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.movie-poster img:hover {
-    transform: scale(1.02) translateY(-10px);
-    box-shadow: 0 40px 80px rgba(229,9,20,0.3); /* Red glow on hover */
+.movie-poster:hover img {
+    transform: scale(1.03);
 }
 
-/* DETAILS SECTION */
+/* Play Button Overlay */
+.play-button-overlay {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: #e50914;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(229, 9, 20, 0.4);
+    transition: 0.3s;
+}
+
+.play-button-overlay:hover {
+    transform: scale(1.1);
+    background: #ff1f2e;
+}
+
+/* Tickets Badge */
+.badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #e50914;
+    color: white;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+}
+
+/* --- RIGHT SIDE: MOVIE DETAILS --- */
 .movie-details {
     flex: 1.2;
     min-width: 320px;
     color: white;
 }
 
-.section-main-title {
+.section-label {
     text-transform: uppercase;
     color: #e50914;
+    letter-spacing: 2px;
     font-size: 14px;
-    letter-spacing: 3px;
     margin-bottom: 10px;
 }
 
-.movie-details h1 {
-    font-size: clamp(32px, 5vw, 60px); /* Responsive font size */
-    margin: 0 0 15px 0;
-    font-weight: 900;
+.movie-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
 }
 
-.release-date {
-    font-size: 1.2rem;
-    color: #fff;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.venue-info {
+.meta-info {
+    margin-bottom: 20px;
+    font-size: 16px;
     color: #bbb;
-    font-size: 1.1rem;
-    margin-bottom: 25px;
+}
+
+.rating-tag {
+    color: #ffb400;
+    font-weight: bold;
 }
 
 .description {
-    line-height: 1.8;
-    color: #aaa;
-    font-size: 1rem;
-    margin-bottom: 40px;
-    border-left: 3px solid #e50914;
-    padding-left: 20px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 30px;
+    max-width: 550px;
 }
 
-/* BUTTONS */
-.primary-btn {
+/* --- TIERED PRICING BOX --- */
+.pricing-box {
+    background: rgba(255, 255, 255, 0.05); /* Glass effect */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tier {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.tier.active {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.status-dot.green { background: #2ecc71; box-shadow: 0 0 8px #2ecc71; }
+.status-dot.blue  { background: #3498db; }
+.status-dot.red   { background: #e74c3c; }
+
+.tier-details {
+    flex-grow: 1;
+}
+
+.tier-name {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.tier-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.tier-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.urgency-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #e50914;
+    margin-top: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* --- LOCATION & DATE --- */
+.event-loc {
+    font-size: 1.1rem;
+    color: #eee;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.event-loc strong {
+    color: #e50914;
+}
+
+/* --- BUTTONS --- */
+.movie-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.primary-btn, .secondary-btn {
     text-decoration: none;
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.primary-btn {
     background: #e50914;
     color: white;
-    padding
-/* RESPONSIVE */
+}
+
+.primary-btn:hover {
+    background: #ff1f2e;
+    box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+    transform: translateY(-3px);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn:hover {
+    background: white;
+    color: black;
+    transform: translateY(-3px);
+}
+
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
     .booking-container {
         flex-direction: column;
+        justify-content: center;
         text-align: center;
     }
-
-    .description {
-        margin: auto;
+    
+    .movie-poster {
+        max-width: 380px;
+        margin-bottom: 20px;
     }
-
+    
+    .description {
+        margin: 0 auto 30px auto;
+    }
+    
     .movie-actions {
         justify-content: center;
+    }
+
+    .tier {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-actions {
+        flex-direction: column;
+    }
+    
+    .primary-btn, .secondary-btn {
+        width: 100%;
     }
 }
 /* UPCOMING */
