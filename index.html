@@ -211,7 +211,25 @@ margin: 0 auto; display: block;" alt="Full On Entertainments logo featuring a co
 © 2026 Full On Entertainments. All rights reserved.
 </p>
 </footer>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
+    menuToggle.addEventListener('click', () => {
+        // This opens/closes the menu on mobile
+        navLinks.classList.toggle('active');
+        // This animates the hamburger icon into an 'X'
+        menuToggle.classList.toggle('active');
+    });
+
+    // Optional: Close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
+</script>
 </body>
 
 </html>
