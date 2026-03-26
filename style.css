@@ -794,7 +794,7 @@ align-items:center;
 .contact-social a:hover .fa-whatsapp{
     color:#25D366;
 }
-
+.contact-social a:hover .fa-envelope { color: #ff7a00; }
 /* SERVICES */
 .service-box{
 background:var(--card);
